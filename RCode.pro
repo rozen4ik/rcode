@@ -26,11 +26,13 @@ QT_QPA_PLATFORMTHEME=appmenu-qt5
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    highlighter.cpp \
-    codeeditor.cpp
+    codeeditor.cpp \
+    highlighterhtml.cpp \
+    highlightercpp.cpp
 
 HEADERS  += mainwindow.h \
-    highlighter.h \
-    codeeditor.h
+    codeeditor.h \
+    highlighterhtml.h \
+    highlightercpp.h
 
 FORMS +=

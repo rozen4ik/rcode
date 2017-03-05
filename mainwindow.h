@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "highlighter.h"
+#include "highlightercpp.h"
+#include "highlighterhtml.h"
 #include "codeeditor.h"
 
 class MainWindow : public QMainWindow
@@ -22,9 +23,12 @@ private:
     void setupEditor();
     void setupFileMenu();
     void setupHelpMenu();
+    void setupDockWidgets();
 
+    QDockWidget *dockWidgets;
     CodeEditor *editor;
-    Highlighter *highlighter;
+    HighlighterCPP *highlighterCPP;
+    HighlighterHTML *highlighterHTML;
 };
 
 #endif // MAINWINDOW_H

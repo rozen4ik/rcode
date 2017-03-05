@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupFileMenu();
     setupHelpMenu();
     setupEditor();
+    setupDockWidgets();
     setCentralWidget(editor);
     setWindowTitle(tr("RCode"));
 }
@@ -61,7 +62,8 @@ void MainWindow::setupEditor()
     editor = new CodeEditor();
     editor->setFont(font);
     editor->setTabSpaces(4);
-    highlighter = new Highlighter(editor->document());
+    highlighterCPP = new HighlighterCPP(editor->document());
+    //highlighterHTML = new HighlighterHTML(editor->document());
     statusBar()->showMessage("Ready to work!");
 }
 
@@ -82,3 +84,14 @@ void MainWindow::setupHelpMenu()
     helpMenu->addAction(tr("&About"), this, SLOT(about()));
 }
 
+void MainWindow::setupDockWidgets()
+{
+    QComboBox *cmBox = new QComboBox();
+    cmBox->addItem("C++");
+    cmBox->addItem("HTML");
+    cmBox->addItem("Plain Text");
+    QDockWidget *dockWidget = new QDockWidget(tr("Dock Widget"), this);
+    //dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    dockWidget->setWidget(cmBox);
+    addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
+}
