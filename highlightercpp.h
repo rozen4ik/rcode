@@ -8,12 +8,12 @@ QT_BEGIN_NAMESPACE
 class QTextDocument;
 QT_END_NAMESPACE
 
-class Highlighter : public QSyntaxHighlighter
+class HighlighterCPP : public QSyntaxHighlighter
 {
     Q_OBJECT
 
 public:
-    Highlighter(QTextDocument *parent = 0);
+    HighlighterCPP(QTextDocument *parent = 0);
 
 protected:
     void highlightBlock(const QString &text);
