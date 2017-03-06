@@ -15,11 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About"),
-                tr("<p>The <b>QCodeEdit</b> example shows how " \
-                   "to create a basic code editing component with " \
-                   "simple syntax highlighting by subclassing " \
-                   "the <b>QSyntaxHighlighter</b> class and describing " \
-                   "highlighting rules using regular expressions.</p>"));
+                tr("Author: Mikhail Rozenberg"));
 }
 
 void MainWindow::newFile()
