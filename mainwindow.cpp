@@ -28,7 +28,8 @@ void MainWindow::openFile(const QString &path)
     QString fileName = path;
     if (fileName.isNull())
     {
-        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "C++ Files (*.cpp *.h)");
+        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C++ Files (*.cpp *.h);; HTML Files (*.html);; "
+                                                                           "Java Files (*.java)");
     }
     if (!fileName.isEmpty()) {
         QFile file(fileName);
@@ -40,7 +41,7 @@ void MainWindow::openFile(const QString &path)
 
 void MainWindow::saveAsFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.cpp;;*.h"));
+    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;;*.cpp;;*.h;;*.html;;*.java"));
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::ReadWrite);
@@ -58,8 +59,6 @@ void MainWindow::setupEditor()
     editor = new CodeEditor();
     editor->setFont(font);
     editor->setTabSpaces(4);
-    highlighterCPP = new HighlighterCPP(editor->document());
-    //highlighterHTML = new HighlighterHTML(editor->document());
     statusBar()->showMessage("Ready to work!");
 }
 
@@ -83,11 +82,33 @@ void MainWindow::setupHelpMenu()
 void MainWindow::setupDockWidgets()
 {
     QComboBox *cmBox = new QComboBox();
+    cmBox->addItem("Plain Text");
     cmBox->addItem("C++");
     cmBox->addItem("HTML");
-    cmBox->addItem("Plain Text");
-    QDockWidget *dockWidget = new QDockWidget(tr("Dock Widget"), this);
-    //dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    dockWidget->setWidget(cmBox);
-    addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
+    cmBox->addItem("Java");
+
+    QDockWidget *dockWidgetComBox = new QDockWidget(tr("Dock Widget"), this);
+    dockWidgetComBox->setWindowTitle("Language");
+    dockWidgetComBox->setWidget(cmBox);
+    addDockWidget(Qt::LeftDockWidgetArea, dockWidgetComBox);
+    connect(cmBox, SIGNAL(activated(int)), this, SLOT(comboxIndex(int)));
+}
+
+void MainWindow::comboxIndex(int comboIndex)
+{
+    switch(comboIndex)
+    {
+    case 0:
+        highlighterOFF = new HighlighterOFF(editor->document());
+        break;
+    case 1:
+        highlighterCPP = new HighlighterCPP(editor->document());
+        break;
+    case 2:
+        highlighterHTML = new HighlighterHTML(editor->document());
+    case 3:
+        highlighterJAVA = new HighlighterJAVA(editor->document());
+    default:      
+        break;
+    }
 }

@@ -148,7 +148,6 @@ void CodeEditor::setFont(const QFont& font)
 {
     this->setTabSpaces(4);
     QPlainTextEdit::setFont(font);
-
 }
 
 int CodeEditor::lineNumberAreaWidth()

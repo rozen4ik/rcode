@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "highlightercpp.h"
 #include "highlighterhtml.h"
+#include "highlighteroff.h"
+#include "highlighterjava.h"
 #include "codeeditor.h"
 
 class MainWindow : public QMainWindow
@@ -18,6 +20,8 @@ public slots:
     void newFile();
     void openFile(const QString &path = QString());
     void saveAsFile();
+    void comboxIndex(int comboIndex);
+
 
 private:
     void setupEditor();
@@ -27,8 +31,10 @@ private:
 
     QDockWidget *dockWidgets;
     CodeEditor *editor;
+    HighlighterOFF *highlighterOFF;
     HighlighterCPP *highlighterCPP;
     HighlighterHTML *highlighterHTML;
+    HighlighterJAVA *highlighterJAVA;
 };
 
 #endif // MAINWINDOW_H

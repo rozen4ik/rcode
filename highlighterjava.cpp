@@ -1,23 +1,24 @@
-#include "highlightercpp.h"
+#include "highlighterjava.h"
 
-HighlighterCPP::HighlighterCPP(QTextDocument *parent)
+HighlighterJAVA::HighlighterJAVA(QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
     HighlightingRule rule;
     keywordFormat.setForeground(Qt::darkBlue);
     keywordFormat.setFontWeight(QFont::Bold);
     QStringList keywordPatterns;
-    keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bconst\\b"
+    keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bfinal\\b"
                     << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
                     << "\\bfriend\\b" << "\\binline\\b" << "\\bint\\b"
-                    << "\\blong\\b" << "\\bnamespace\\b" << "\\boperator\\b"
+                    << "\\blong\\b" << "\\bpackage\\b" << "\\boperator\\b"
                     << "\\bprivate\\b" << "\\bprotected\\b" << "\\bpublic\\b"
                     << "\\bshort\\b" << "\\bsignals\\b" << "\\bsigned\\b"
                     << "\\bslots\\b" << "\\bstatic\\b" << "\\bstruct\\b"
                     << "\\btemplate\\b" << "\\btypedef\\b" << "\\btypename\\b"
                     << "\\bunion\\b" << "\\bunsigned\\b" << "\\bvirtual\\b"
                     << "\\bvoid\\b" << "\\bvolatile\\b" << "\\btry\\b"
-                    << "\\bcatch\\b" << "\\bthrow\\b";
+                    << "\\bcatch\\b" << "\\bObject\\b" << "\\bthrow\\b"
+                    << "final";
     foreach (const QString &pattern, keywordPatterns)
     {
         rule.pattern = QRegExp(pattern);
@@ -42,7 +43,7 @@ HighlighterCPP::HighlighterCPP(QTextDocument *parent)
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
     preprocessorFormat.setForeground(Qt::darkRed);
-    rule.pattern = QRegExp("#.*");
+    rule.pattern = QRegExp("import.*");
     rule.format = preprocessorFormat;
     highlightingRules.append(rule);
     multiLineCommentFormat.setForeground(Qt::darkCyan);
@@ -50,7 +51,7 @@ HighlighterCPP::HighlighterCPP(QTextDocument *parent)
     commentEndExpression = QRegExp("\\*/");
 }
 
-void HighlighterCPP::highlightBlock(const QString &text)
+void HighlighterJAVA::highlightBlock(const QString &text)
 {
     foreach (const HighlightingRule &rule, highlightingRules)
     {

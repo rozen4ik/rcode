@@ -1,11 +1,11 @@
-#include "highlightercpp.h"
+#include "highlighteroff.h"
 
-HighlighterCPP::HighlighterCPP(QTextDocument *parent)
+HighlighterOFF::HighlighterOFF(QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
     HighlightingRule rule;
-    keywordFormat.setForeground(Qt::darkBlue);
-    keywordFormat.setFontWeight(QFont::Bold);
+    keywordFormat.setForeground(Qt::black);
+    //keywordFormat.setFontWeight(QFont::Bold);
     QStringList keywordPatterns;
     keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bconst\\b"
                     << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
@@ -16,41 +16,40 @@ HighlighterCPP::HighlighterCPP(QTextDocument *parent)
                     << "\\bslots\\b" << "\\bstatic\\b" << "\\bstruct\\b"
                     << "\\btemplate\\b" << "\\btypedef\\b" << "\\btypename\\b"
                     << "\\bunion\\b" << "\\bunsigned\\b" << "\\bvirtual\\b"
-                    << "\\bvoid\\b" << "\\bvolatile\\b" << "\\btry\\b"
-                    << "\\bcatch\\b" << "\\bthrow\\b";
+                    << "\\bvoid\\b" << "\\bvolatile\\b";
     foreach (const QString &pattern, keywordPatterns)
     {
         rule.pattern = QRegExp(pattern);
         rule.format = keywordFormat;
         highlightingRules.append(rule);
     }
-    classFormat.setFontWeight(QFont::Bold);
-    classFormat.setForeground(Qt::darkMagenta);
+    //classFormat.setFontWeight(QFont::Bold);
+    classFormat.setForeground(Qt::black);
     rule.pattern = QRegExp("\\bQ[A-Za-z]+\\b");
     rule.format = classFormat;
     highlightingRules.append(rule);
-    functionFormat.setForeground(Qt::blue);
+    functionFormat.setForeground(Qt::black);
     rule.pattern = QRegExp("\\b[A-Za-z0-9_]+(?=\\()");
     rule.format = functionFormat;
     highlightingRules.append(rule);
-    quotationFormat.setForeground(Qt::darkBlue);
+    quotationFormat.setForeground(Qt::black);
     rule.pattern = QRegExp("\".*\"");
     rule.format = quotationFormat;
     highlightingRules.append(rule);
-    singleLineCommentFormat.setForeground(Qt::darkGreen);
+    singleLineCommentFormat.setForeground(Qt::black);
     rule.pattern = QRegExp("//[^\n]*");
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
-    preprocessorFormat.setForeground(Qt::darkRed);
+    preprocessorFormat.setForeground(Qt::black);
     rule.pattern = QRegExp("#.*");
     rule.format = preprocessorFormat;
     highlightingRules.append(rule);
-    multiLineCommentFormat.setForeground(Qt::darkCyan);
+    multiLineCommentFormat.setForeground(Qt::black);
     commentStartExpression = QRegExp("/\\*");
     commentEndExpression = QRegExp("\\*/");
 }
 
-void HighlighterCPP::highlightBlock(const QString &text)
+void HighlighterOFF::highlightBlock(const QString &text)
 {
     foreach (const HighlightingRule &rule, highlightingRules)
     {
