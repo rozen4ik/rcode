@@ -106,8 +106,10 @@ void MainWindow::comboxIndex(int comboIndex)
         break;
     case 2:
         highlighterHTML = new HighlighterHTML(editor->document());
+        break;
     case 3:
         highlighterJAVA = new HighlighterJAVA(editor->document());
+        break;
     default:      
         break;
     }
