@@ -29,7 +29,7 @@ void MainWindow::openFile(const QString &path)
     if (fileName.isNull())
     {
         fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C++ Files (*.cpp *.h);; HTML Files (*.html);; "
-                                                                           "Java Files (*.java)");
+                                                                           "Java Files (*.java);; C# Files (*.cs");
     }
     if (!fileName.isEmpty()) {
         QFile file(fileName);
@@ -41,7 +41,7 @@ void MainWindow::openFile(const QString &path)
 
 void MainWindow::saveAsFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;;*.cpp;;*.h;;*.html;;*.java"));
+    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.cpp;; *.h;; *.html;; *.java;; *.cs"));
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::ReadWrite);
@@ -87,6 +87,7 @@ void MainWindow::setupDockWidgets()
     cmBox->addItem("C++");
     cmBox->addItem("HTML");
     cmBox->addItem("Java");
+    cmBox->addItem("C#");
 
     QDockWidget *dockWidgetComBox = new QDockWidget(tr("Dock Widget"), this);
     dockWidgetComBox->setWindowTitle("Language");
@@ -110,6 +111,9 @@ void MainWindow::comboxIndex(int comboIndex)
         break;
     case 3:
         highlighterJAVA = new HighlighterJAVA(editor->document());
+        break;
+    case 4:
+        highlighterCSHARP = new HighlighterCSHARP(editor->document());
         break;
     default:      
         break;

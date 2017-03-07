@@ -6,6 +6,7 @@
 #include "highlighterhtml.h"
 #include "highlighteroff.h"
 #include "highlighterjava.h"
+#include "highlightercsharp.h"
 #include "codeeditor.h"
 
 class MainWindow : public QMainWindow
@@ -36,6 +37,7 @@ private:
     HighlighterCPP *highlighterCPP;
     HighlighterHTML *highlighterHTML;
     HighlighterJAVA *highlighterJAVA;
+    HighlighterCSHARP *highlighterCSHARP;
 };
 
 #endif // MAINWINDOW_H

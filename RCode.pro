@@ -30,13 +30,15 @@ SOURCES += main.cpp\
     highlighterhtml.cpp \
     highlightercpp.cpp \
     highlighteroff.cpp \
-    highlighterjava.cpp
+    highlighterjava.cpp \
+    highlightercsharp.cpp
 
 HEADERS  += mainwindow.h \
     codeeditor.h \
     highlighterhtml.h \
     highlightercpp.h \
     highlighteroff.h \
-    highlighterjava.h
+    highlighterjava.h \
+    highlightercsharp.h
 
 FORMS +=
