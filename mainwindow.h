@@ -19,6 +19,7 @@ public slots:
     void about();
     void newFile();
     void openFile(const QString &path = QString());
+    void settingsDialog();
     void saveAsFile();
     void comboxIndex(int comboIndex);
 

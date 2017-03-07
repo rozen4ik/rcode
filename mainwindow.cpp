@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupHelpMenu();
     setupEditor();
     setupDockWidgets();
-    setCentralWidget(editor);
+    setCentralWidget(editor);    
     setWindowTitle(tr("RCode"));
 }
 
@@ -68,7 +68,8 @@ void MainWindow::setupFileMenu()
     menuBar()->addMenu(fileMenu);
     fileMenu->addAction(tr("&New"), this, SLOT(newFile()), QKeySequence::New);
     fileMenu->addAction(tr("&Open..."), this, SLOT(openFile()), QKeySequence::Open);
-    fileMenu->addAction(tr("&Save As.."), this, SLOT(saveAsFile()), QKeySequence::Save);
+    fileMenu->addAction(tr("&Save As..."), this, SLOT(saveAsFile()), QKeySequence::Save);
+    fileMenu->addAction(tr("Settings..."), this, SLOT(settingsDialog()), QKeySequence::Preferences);
     fileMenu->addAction(tr("&Exit"), qApp, SLOT(quit()), QKeySequence::Quit);
 }
 
@@ -113,4 +114,9 @@ void MainWindow::comboxIndex(int comboIndex)
     default:      
         break;
     }
+}
+
+void MainWindow::settingsDialog()
+{
+    editor->setFont(QFontDialog::getFont(0, editor->font()));
 }
