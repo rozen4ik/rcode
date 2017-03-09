@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About"),
-                tr("Author: Mikhail Rozenberg"));
+                tr("Author: Mikhail Rozenberg\n"\
+                   "RCode version 0.1"));
 }
 
 void MainWindow::newFile()
