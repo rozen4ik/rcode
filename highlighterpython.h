@@ -1,6 +1,5 @@
-#ifndef HIGHLIGHTERCSHARP_H
-#define HIGHLIGHTERCSHARP_H
-
+#ifndef HIGHLIGHTERPYTHON_H
+#define HIGHLIGHTERPYTHON_H
 
 #include <QSyntaxHighlighter>
 #include <QTextCharFormat>
@@ -9,12 +8,12 @@ QT_BEGIN_NAMESPACE
 class QTextDocument;
 QT_END_NAMESPACE
 
-class HighlighterCSHARP : public QSyntaxHighlighter
+class HighlighterPYTHON : public QSyntaxHighlighter
 {
     Q_OBJECT
 
 public:
-    HighlighterCSHARP(QTextDocument *parent = 0);
+    HighlighterPYTHON(QTextDocument *parent = 0);
 
 protected:
     void highlightBlock(const QString &text);
@@ -35,7 +34,5 @@ private:
     QTextCharFormat multiLineCommentFormat;
     QTextCharFormat quotationFormat;
     QTextCharFormat functionFormat;
-    QTextCharFormat preprocessorFormat;
 };
-
-#endif // HIGHLIGHTERCSHARP_H
+#endif // HIGHLIGHTERPYTHON_H

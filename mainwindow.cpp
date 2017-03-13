@@ -30,7 +30,7 @@ void MainWindow::openFile(const QString &path)
     if (fileName.isNull())
     {
         fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C++ Files (*.cpp *.h);; HTML Files (*.html);; "
-                                                                           "Java Files (*.java);; C# Files (*.cs");
+                                                                           "Java Files (*.java);; C# Files (*.cs);; Python Files (*.py)");
     }
     if (!fileName.isEmpty()) {
         QFile file(fileName);
@@ -42,7 +42,7 @@ void MainWindow::openFile(const QString &path)
 
 void MainWindow::saveAsFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.cpp;; *.h;; *.html;; *.java;; *.cs"));
+    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; *.py"));
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::ReadWrite);
@@ -56,7 +56,7 @@ void MainWindow::setupEditor()
     QFont font;
     font.setFamily("Courier");
     font.setFixedPitch(true);
-    font.setPointSize(10);
+    font.setPointSize(14);
     editor = new CodeEditor();
     editor->setFont(font);
     editor->setTabSpaces(4);
@@ -89,6 +89,7 @@ void MainWindow::setupDockWidgets()
     cmBox->addItem("HTML");
     cmBox->addItem("Java");
     cmBox->addItem("C#");
+    cmBox->addItem("Python");
 
     QDockWidget *dockWidgetComBox = new QDockWidget(tr("Dock Widget"), this);
     dockWidgetComBox->setWindowTitle("Language");
@@ -115,6 +116,9 @@ void MainWindow::comboxIndex(int comboIndex)
         break;
     case 4:
         highlighterCSHARP = new HighlighterCSHARP(editor->document());
+        break;
+    case 5:
+        highlighterPYTHON = new HighlighterPYTHON(editor->document());
         break;
     default:      
         break;

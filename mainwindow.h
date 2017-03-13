@@ -7,6 +7,7 @@
 #include "highlighteroff.h"
 #include "highlighterjava.h"
 #include "highlightercsharp.h"
+#include "highlighterpython.h"
 #include "codeeditor.h"
 
 class MainWindow : public QMainWindow
@@ -24,7 +25,6 @@ public slots:
     void saveAsFile();
     void comboxIndex(int comboIndex);
 
-
 private:
     void setupEditor();
     void setupFileMenu();
@@ -38,6 +38,7 @@ private:
     HighlighterHTML *highlighterHTML;
     HighlighterJAVA *highlighterJAVA;
     HighlighterCSHARP *highlighterCSHARP;
+    HighlighterPYTHON *highlighterPYTHON;
 };
 
 #endif // MAINWINDOW_H
