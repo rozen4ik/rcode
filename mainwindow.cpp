@@ -16,12 +16,13 @@ void MainWindow::about()
 {
     QMessageBox::about(this, tr("About"),
                 tr("Author: Mikhail Rozenberg\n"\
-                   "RCode version 0.1"));
+                   "RCode version 0.2"));
 }
 
 void MainWindow::newFile()
 {
     editor->clear();
+    statusBar()->showMessage("New file");
 }
 
 void MainWindow::openFile(const QString &path)
@@ -29,7 +30,7 @@ void MainWindow::openFile(const QString &path)
     QString fileName = path;
     if (fileName.isNull())
     {
-        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C++ Files (*.cpp *.h);; HTML Files (*.html);; "
+        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C/C++ Files (*.c *.cpp *.h);; HTML Files (*.html);; "
                                                                            "Java Files (*.java);; C# Files (*.cs);; Python Files (*.py)");
     }
     if (!fileName.isEmpty()) {
@@ -42,7 +43,7 @@ void MainWindow::openFile(const QString &path)
 
 void MainWindow::saveAsFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; *.py"));
+    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.c;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; *.py"));
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::ReadWrite);
@@ -85,6 +86,7 @@ void MainWindow::setupDockWidgets()
 {
     QComboBox *cmBox = new QComboBox();
     cmBox->addItem("Plain Text");
+    cmBox->addItem("C");
     cmBox->addItem("C++");
     cmBox->addItem("HTML");
     cmBox->addItem("Java");
@@ -109,15 +111,18 @@ void MainWindow::comboxIndex(int comboIndex)
         highlighterCPP = new HighlighterCPP(editor->document());
         break;
     case 2:
-        highlighterHTML = new HighlighterHTML(editor->document());
+        highlighterCPP = new HighlighterCPP(editor->document());
         break;
     case 3:
-        highlighterJAVA = new HighlighterJAVA(editor->document());
+        highlighterHTML = new HighlighterHTML(editor->document());
         break;
     case 4:
-        highlighterCSHARP = new HighlighterCSHARP(editor->document());
+        highlighterJAVA = new HighlighterJAVA(editor->document());
         break;
     case 5:
+        highlighterCSHARP = new HighlighterCSHARP(editor->document());
+        break;
+    case 6:
         highlighterPYTHON = new HighlighterPYTHON(editor->document());
         break;
     default:      
