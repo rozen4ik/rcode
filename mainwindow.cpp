@@ -32,8 +32,8 @@ void MainWindow::openFile(const QString &path)
     {
         fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C/C++ Files (*.c *.cpp *.h);; "
                                                                            "HTML Files (*.html);; ""Java Files (*.java);; "
-                                                                           "C# Files (*.cs);; Python Files (*.py)"
-                                                                           "JavaScript (*.js)");
+                                                                           "C# Files (*.cs);; Python Files (*.py);; "
+                                                                           "JavaScript (*.js);; Swift Files (*.swift)");
     }
     if (!fileName.isEmpty()) {
         QFile file(fileName);
@@ -46,7 +46,7 @@ void MainWindow::openFile(const QString &path)
 void MainWindow::saveAsFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.c;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; "
-                                                                                       "*.py;; *.js"));
+                                                                                       "*.py;; *.js;; *.swift"));
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::ReadWrite);
@@ -96,6 +96,7 @@ void MainWindow::setupDockWidgets()
     cmBox->addItem("C#");
     cmBox->addItem("Python");
     cmBox->addItem("JavaScript");
+    cmBox->addItem("Swift");
 
     QDockWidget *dockWidgetComBox = new QDockWidget(tr("Dock Widget"), this);
     dockWidgetComBox->setWindowTitle("Language");
@@ -131,6 +132,10 @@ void MainWindow::comboxIndex(int comboIndex)
         break;
     case 7:
         highlighterJAVASCRIPT = new HighlighterJAVASCRIPT(editor->document());
+        break;
+    case 8:
+        highlighterSWIFT = new HighlighterSWIFT(editor->document());
+        break;
     default:      
         break;
     }
