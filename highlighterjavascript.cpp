@@ -7,18 +7,21 @@ HighlighterJAVASCRIPT::HighlighterJAVASCRIPT(QTextDocument *parent)
     keywordFormat.setForeground(Qt::darkBlue);
     keywordFormat.setFontWeight(QFont::Bold);
     QStringList keywordPatterns;
-    keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bfinal\\b"
-                    << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
-                    << "\\bfriend\\b" << "\\binline\\b" << "\\bint\\b"
-                    << "\\blong\\b" << "\\bpackage\\b" << "\\boperator\\b"
-                    << "\\bprivate\\b" << "\\bprotected\\b" << "\\bpublic\\b"
-                    << "\\bshort\\b" << "\\bsigned\\b"
-                    << "\\bstatic\\b" << "\\bstruct\\b"
-                    << "\\btemplate\\b" << "\\btypedef\\b" << "\\btypename\\b"
-                    << "\\bunion\\b" << "\\bunsigned\\b" << "\\bvirtual\\b"
-                    << "\\bvoid\\b" << "\\bvolatile\\b" << "\\btry\\b"
-                    << "\\bcatch\\b" << "\\bObject\\b" << "\\bthrow\\b"
-                    << "final";
+    keywordPatterns << "\\babstract\\b" << "\\belse\\b" << "\\binstanceof\\b" << "\\bswitch\\b"
+                    << "\\bboolean\\b" << "\\benum\\b" << "\\bint\\b" << "\\bsynchronized\\b"
+                    << "\\bbreak\\b" << "\\bexport\\b" << "\\binterface\\b" << "\\bthis\\b"
+                    << "\\bbyte\\b" << "\\bextends\\b" << "\\blong\\b" << "\\bthrow\\b"
+                    << "\\bcase\\b" << "\\bfalse\\b" << "\\bnative\\b" << "\\bthrows\\b"
+                    << "\\bcatch\\b" << "\\bfinal\\b" << "\\bnew\\b" << "\\btransient\\b"
+                    << "\\bchar\\b" << "\\bfinally\\b" << "\\bnull\\b" << "\\btrue\\b"
+                    << "\\bclass\\b" << "\\bfloat\\b" << "\\bpackage\\b" << "\\btry\\b"
+                    << "\\bconst\\b" << "\\bfor\\b" << "\\bprivate\\b" << "\\btypeof\\b"
+                    << "\\bcontinue\\b" << "\\bfunction\\b" << "\\bprotected\\b" << "\\bvar\\b"
+                    << "\\bdebugger\\b" << "\\bgoto\\b" << "\\bpublic\\b" << "\\bvoid\\b"
+                    << "\\bdefault\\b" << "\\bif\\b" << "\\breturn\\b" << "\\bvolatile\\b"
+                    << "\\bdo\\b" << "\\bimport\\b" << "\\bstatic\\b" << "\\bwith\\b"
+                    << "\\bdelete\\b" << "\\bimplements\\b" << "\\bshort\\b" << "\\bwhile\\b"
+                    << "\\bdouble\\b" << "\\bin\\b" << "\\bsuper\\b";
     foreach (const QString &pattern, keywordPatterns)
     {
         rule.pattern = QRegExp(pattern);
@@ -37,8 +40,8 @@ HighlighterJAVASCRIPT::HighlighterJAVASCRIPT(QTextDocument *parent)
     rule.pattern = QRegExp("//[^\n]*");
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
-    preprocessorFormat.setForeground(Qt::darkRed);
-    rule.pattern = QRegExp("import.*");
+    preprocessorFormat.setForeground(Qt::darkBlue);
+    rule.pattern = QRegExp("\'.*\'");
     rule.format = preprocessorFormat;
     highlightingRules.append(rule);
     multiLineCommentFormat.setForeground(Qt::darkCyan);
