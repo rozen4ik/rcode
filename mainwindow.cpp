@@ -30,8 +30,9 @@ void MainWindow::openFile(const QString &path)
     QString fileName = path;
     if (fileName.isNull())
     {
-        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C/C++ Files (*.c *.cpp *.h);; HTML Files (*.html);; "
-                                                                           "Java Files (*.java);; C# Files (*.cs);; Python Files (*.py)");
+        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C/C++ Files (*.c *.cpp *.h);; "
+                                                                           "HTML Files (*.html);; ""Java Files (*.java);; "
+                                                                           "C# Files (*.cs);; Python Files (*.py)");
     }
     if (!fileName.isEmpty()) {
         QFile file(fileName);
@@ -43,7 +44,8 @@ void MainWindow::openFile(const QString &path)
 
 void MainWindow::saveAsFile()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.c;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; *.py"));
+    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.c;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; "
+                                                                                       "*.py"));
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::ReadWrite);
@@ -134,3 +136,51 @@ void MainWindow::settingsDialog()
 {
     editor->setFont(QFontDialog::getFont(0, editor->font()));
 }
+
+//QStringList list;
+//list << "Вася" << "Петя" << "Катя" << "Маша" << "Юля" << "Петр Петр" << "Павел" << "Пинки"
+//        << "Петр Паша" << "Петр Вася" << "Петр Катя" << "Петр Пинки" << "Петр Ваня";
+
+//QCompleter *completer = new QCompleter(list, this);
+//completer->setCaseSensitivity(Qt::CaseInsensitive);
+
+//QLineEdit *e = new QLineEdit();
+//e->setCompleter(completer);
+
+//void MeasuresPanel::searchTextChanged(QString)
+//{
+//    // Ищем введенный текст...
+//    Database d;
+//    QLineEdit *edit = static_cast< QLineEdit * >(sender());
+//    QCompleter *completer = edit->completer();
+
+//    // Выясним, что же все таки надо искать...
+//    // nameLine, diseaseLine, pointLine
+//    QStringList items;
+//    QVector< int > keys;
+
+//    if (!edit->objectName().compare("nameLine", Qt::CaseInsensitive))
+//    {
+//        // Работаем с именем
+//        keys = d.searchName(edit->text());
+//    } else
+//        if (!edit->objectName().compare("diseaseLine", Qt::CaseInsensitive))
+//        {
+//            // Работа с заболеванием
+//            keys = d.searchDisease(edit->text());
+//        } else // Работа с точками
+//            keys = d.searchPoints(edit->text());
+
+//    // Нашли ряд ключей
+//    for (QVector< int >::iterator i = keys.begin(); i != keys.end(); i++)
+//    {
+//        items << d.getName(*i);
+//    }
+
+//    delete completer;
+//    completer = new QCompleter(items);
+//    completer->setCompletionMode(QCompleter::InlineCompletion);
+//    completer->setCaseSensitivity(Qt::CaseInsensitive);
+//    edit->setCompleter(completer);
+//    edit->setFocus();
+//}

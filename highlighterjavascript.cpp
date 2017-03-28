@@ -1,20 +1,24 @@
-#include "highlighterpython.h"
+#include "highlighterjavascript.h"
 
-HighlighterPYTHON::HighlighterPYTHON(QTextDocument *parent)
+HighlighterJAVASCRIPT::HighlighterJAVASCRIPT(QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
     HighlightingRule rule;
     keywordFormat.setForeground(Qt::darkBlue);
     keywordFormat.setFontWeight(QFont::Bold);
     QStringList keywordPatterns;
-    keywordPatterns << "\\bFalse\\b" << "\\bclass\\b" << "\\bfinaly" << "\\bis\\b" << "\\breturn\\b"
-                    << "\\bNone\\b" << "\\bcontinue\\b" << "\\bfor\\b" << "\\blambda\\b" << "\\btry"
-                    << "\\bTrue\\b" << "\\bdef\\b" << "\\bfrom\\b" << "\\bnonlocal\\b" << "\\bwhile\\b"
-                    << "\\band\\b" << "\\bdel\\b" << "\\bglobal\\b" << "\\bnot\\b" << "\\bwith\\b"
-                    << "\\bas\\b" << "\\belif\\b" << "\\bif\\b" << "\\bor\\b" <<"\\byield\\b"
-                    << "\\bassert\\b" << "\\belse\\b" << "\\bpass\\b" << "\\bbreak\\b" << "\\bexcept\\b"
-                    << "\\bin\\b" << "\\braise\\b" << "\\bint\\b" << "\\bfloat\\b" << "\\bcomplex\\b"
-                    << "\\bimport";
+    keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bfinal\\b"
+                    << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
+                    << "\\bfriend\\b" << "\\binline\\b" << "\\bint\\b"
+                    << "\\blong\\b" << "\\bpackage\\b" << "\\boperator\\b"
+                    << "\\bprivate\\b" << "\\bprotected\\b" << "\\bpublic\\b"
+                    << "\\bshort\\b" << "\\bsigned\\b"
+                    << "\\bstatic\\b" << "\\bstruct\\b"
+                    << "\\btemplate\\b" << "\\btypedef\\b" << "\\btypename\\b"
+                    << "\\bunion\\b" << "\\bunsigned\\b" << "\\bvirtual\\b"
+                    << "\\bvoid\\b" << "\\bvolatile\\b" << "\\btry\\b"
+                    << "\\bcatch\\b" << "\\bObject\\b" << "\\bthrow\\b"
+                    << "final";
     foreach (const QString &pattern, keywordPatterns)
     {
         rule.pattern = QRegExp(pattern);
@@ -30,15 +34,19 @@ HighlighterPYTHON::HighlighterPYTHON(QTextDocument *parent)
     rule.format = quotationFormat;
     highlightingRules.append(rule);
     singleLineCommentFormat.setForeground(Qt::darkGreen);
-    rule.pattern = QRegExp("#[^\n]*");
+    rule.pattern = QRegExp("//[^\n]*");
     rule.format = singleLineCommentFormat;
+    highlightingRules.append(rule);
+    preprocessorFormat.setForeground(Qt::darkRed);
+    rule.pattern = QRegExp("import.*");
+    rule.format = preprocessorFormat;
     highlightingRules.append(rule);
     multiLineCommentFormat.setForeground(Qt::darkCyan);
     commentStartExpression = QRegExp("/\\*");
     commentEndExpression = QRegExp("\\*/");
 }
 
-void HighlighterPYTHON::highlightBlock(const QString &text)
+void HighlighterJAVASCRIPT::highlightBlock(const QString &text)
 {
     foreach (const HighlightingRule &rule, highlightingRules)
     {

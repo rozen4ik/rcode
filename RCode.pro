@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     highlighteroff.cpp \
     highlighterjava.cpp \
     highlightercsharp.cpp \
-    highlighterpython.cpp
+    highlighterpython.cpp \
+    highlighterjavascript.cpp
 
 HEADERS  += mainwindow.h \
     codeeditor.h \
@@ -41,6 +42,7 @@ HEADERS  += mainwindow.h \
     highlighteroff.h \
     highlighterjava.h \
     highlightercsharp.h \
-    highlighterpython.h
+    highlighterpython.h \
+    highlighterjavascript.h
 
 FORMS +=
