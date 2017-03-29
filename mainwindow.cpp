@@ -33,7 +33,8 @@ void MainWindow::openFile(const QString &path)
         fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", "Text Files (*.txt);; C/C++ Files (*.c *.cpp *.h);; "
                                                                            "HTML Files (*.html);; ""Java Files (*.java);; "
                                                                            "C# Files (*.cs);; Python Files (*.py);; "
-                                                                           "JavaScript (*.js);; Swift Files (*.swift)");
+                                                                           "JavaScript (*.js);; Swift Files (*.swift);; "
+                                                                           "Ruby Files (*.rb);; Objective-c Files(*.m *.h");
     }
     if (!fileName.isEmpty()) {
         QFile file(fileName);
@@ -46,7 +47,7 @@ void MainWindow::openFile(const QString &path)
 void MainWindow::saveAsFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.c;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; "
-                                                                                       "*.py;; *.js;; *.swift"));
+                                                                                       "*.py;; *.js;; *.swift;; *.rb;; *.m"));
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::ReadWrite);
@@ -97,6 +98,8 @@ void MainWindow::setupDockWidgets()
     cmBox->addItem("Python");
     cmBox->addItem("JavaScript");
     cmBox->addItem("Swift");
+    cmBox->addItem("Ruby");
+    cmBox->addItem("Objective-c");
 
     QDockWidget *dockWidgetComBox = new QDockWidget(tr("Dock Widget"), this);
     dockWidgetComBox->setWindowTitle("Language");
@@ -135,6 +138,12 @@ void MainWindow::comboxIndex(int comboIndex)
         break;
     case 8:
         highlighterSWIFT = new HighlighterSWIFT(editor->document());
+        break;
+    case 9:
+        highlighterRUBY = new HighlighterRUBY(editor->document());
+        break;
+    case 10:
+        highlighterOBJECTIVE_C = new HighlighterOBJECTIVE_C(editor->document());
         break;
     default:      
         break;

@@ -34,7 +34,9 @@ SOURCES += main.cpp\
     highlightercsharp.cpp \
     highlighterpython.cpp \
     highlighterjavascript.cpp \
-    highlighterswift.cpp
+    highlighterswift.cpp \
+    highlighterruby.cpp \
+    highlighterobjective_c.cpp
 
 HEADERS  += mainwindow.h \
     codeeditor.h \
@@ -45,6 +47,8 @@ HEADERS  += mainwindow.h \
     highlightercsharp.h \
     highlighterpython.h \
     highlighterjavascript.h \
-    highlighterswift.h
+    highlighterswift.h \
+    highlighterruby.h \
+    highlighterobjective_c.h
 
 FORMS +=

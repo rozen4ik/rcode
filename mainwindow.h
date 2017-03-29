@@ -10,6 +10,8 @@
 #include "highlighterpython.h"
 #include "highlighterjavascript.h"
 #include "highlighterswift.h"
+#include "highlighterruby.h"
+#include "highlighterobjective_c.h"
 #include "codeeditor.h"
 
 class MainWindow : public QMainWindow
@@ -43,6 +45,8 @@ private:
     HighlighterPYTHON *highlighterPYTHON;
     HighlighterJAVASCRIPT *highlighterJAVASCRIPT;
     HighlighterSWIFT *highlighterSWIFT;
+    HighlighterRUBY *highlighterRUBY;
+    HighlighterOBJECTIVE_C *highlighterOBJECTIVE_C;
 };
 
 #endif // MAINWINDOW_H
