@@ -22,7 +22,14 @@ void MainWindow::about()
 void MainWindow::newFile()
 {
     editor->clear();
-    statusBar()->showMessage("New file");
+    QString fileName = QFileDialog::getSaveFileName(this, "Save As File", "source", tr("*.txt;; *.c;; *.cpp;; *.h;; *.html;; *.java;; *.cs;; "
+                                                                                       "*.py;; *.js;; *.swift;; *.rb;; *.m"));
+    QFile file;
+    file.setFileName(fileName);
+    file.open(QIODevice::ReadWrite);
+    QTextStream stream(&file);
+    stream<<editor->toPlainText();
+    statusBar()->showMessage("New file: " + fileName);
 }
 
 void MainWindow::openFile(const QString &path)
@@ -36,10 +43,14 @@ void MainWindow::openFile(const QString &path)
                                                                            "JavaScript (*.js);; Swift Files (*.swift);; "
                                                                            "Ruby Files (*.rb);; Objective-c Files(*.m *.h");
     }
-    if (!fileName.isEmpty()) {
+    if (!fileName.isEmpty())
+    {
         QFile file(fileName);
         if (file.open(QFile::ReadOnly | QFile::Text))
-            editor->setPlainText(file.readAll());
+        {
+            QTextStream output(&file);
+            editor->setPlainText(output.readAll());
+        }
     }
     statusBar()->showMessage("Read to file: " + fileName);
 }
@@ -58,6 +69,7 @@ void MainWindow::saveAsFile()
 
 void MainWindow::setupEditor()
 {
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     QFont font;
     font.setFamily("Courier");
     font.setFixedPitch(true);
@@ -75,7 +87,7 @@ void MainWindow::setupFileMenu()
     fileMenu->addAction(tr("&New"), this, SLOT(newFile()), QKeySequence::New);
     fileMenu->addAction(tr("&Open..."), this, SLOT(openFile()), QKeySequence::Open);
     fileMenu->addAction(tr("&Save As..."), this, SLOT(saveAsFile()), QKeySequence::Save);
-    fileMenu->addAction(tr("Settings..."), this, SLOT(settingsDialog()), QKeySequence::Preferences);
+    fileMenu->addAction(tr("&Settings..."), this, SLOT(settingsDialog()), QKeySequence::Preferences);
     fileMenu->addAction(tr("&Exit"), qApp, SLOT(quit()), QKeySequence::Quit);
 }
 
@@ -154,6 +166,7 @@ void MainWindow::settingsDialog()
 {
     editor->setFont(QFontDialog::getFont(0, editor->font()));
 }
+
 
 //QStringList list;
 //list << "Вася" << "Петя" << "Катя" << "Маша" << "Юля" << "Петр Петр" << "Павел" << "Пинки"
