@@ -50,6 +50,7 @@ void MainWindow::openFile(const QString &path)
         {
             QTextStream output(&file);
             editor->setPlainText(output.readAll());
+            file.close();
         }
     }
     statusBar()->showMessage("Read to file: " + fileName);
